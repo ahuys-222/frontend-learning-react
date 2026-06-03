@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Step 1: HTML + CSS 基础</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ==================== 1. HTML 基础标签 ==================== -->
+  <header>
+    <h1>前端学习：HTML + CSS 基础</h1>
+    <p class="subtitle">掌握这个，你就能写出任何静态页面</p>
+  </header>
+
+  <main>
+    <!-- 标题层级 -->
+    <section>
+      <h2>1. 标题与段落</h2>
+      <h3>这是 h3 标题</h3>
+      <h4>这是 h4 标题</h4>
+      <p>这是一个段落。<strong>加粗文字</strong>，<em>斜体文字</em>，<a href="#">这是一个链接</a>。</p>
+      <p>换行演示：<br>这是第二行。HTML 会忽略代码中的空行，需要用 br 标签来换行。</p>
+    </section>
+
+    <!-- 列表 -->
+    <section>
+      <h2>2. 列表</h2>
+      <h3>无序列表（ul）</h3>
+      <ul>
+        <li>HTML 负责结构</li>
+        <li>CSS 负责样式</li>
+        <li>JavaScript 负责交互</li>
+      </ul>
+
+      <h3>有序列表（ol）</h3>
+      <ol>
+        <li>先学 HTML + CSS</li>
+        <li>再学 JavaScript</li>
+        <li>最后学 React</li>
+      </ol>
+    </section>
+
+    <!-- 表格 -->
+    <section>
+      <h2>3. 表格</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>技术</th>
+            <th>作用</th>
+            <th>难度</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>HTML</td>
+            <td>页面结构</td>
+            <td>简单</td>
+          </tr>
+          <tr>
+            <td>CSS</td>
+            <td>页面样式</td>
+            <td>中等</td>
+          </tr>
+          <tr>
+            <td>JavaScript</td>
+            <td>页面交互</td>
+            <td>偏难</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 图片 -->
+    <section>
+      <h2>4. 图片</h2>
+      <div class="placeholder-img">
+        <span>这是一张占位图（404 × 200）</span>
+      </div>
+      <p class="note">img 是自闭合标签，alt 属性用于无障碍访问和加载失败时的提示</p>
+    </section>
+
+    <!-- 表单 — 这是面试和实战重点 -->
+    <section>
+      <h2>5. 表单（重点）</h2>
+      <form onsubmit="event.preventDefault(); alert('表单提交！（这只是演示）')">
+        <div class="form-group">
+          <label for="username">用户名：</label>
+          <input type="text" id="username" name="username" placeholder="请输入用户名">
+        </div>
+
+        <div class="form-group">
+          <label for="password">密码：</label>
+          <input type="password" id="password" name="password" placeholder="请输入密码">
+        </div>
+
+        <div class="form-group">
+          <label for="city">城市：</label>
+          <select id="city" name="city">
+            <option value="">请选择</option>
+            <option value="beijing">北京</option>
+            <option value="shanghai">上海</option>
+            <option value="shenzhen">深圳</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>
+            <input type="checkbox" name="agree"> 我同意条款
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label>性别：</label>
+          <label><input type="radio" name="gender" value="male"> 男</label>
+          <label><input type="radio" name="gender" value="female"> 女</label>
+        </div>
+
+        <div class="form-group">
+          <label for="bio">简介：</label>
+          <textarea id="bio" name="bio" rows="3" placeholder="写点什么..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">提交</button>
+        <button type="reset" class="btn btn-secondary">重置</button>
+      </form>
+    </section>
+
+    <!-- 块级 vs 行内 -->
+    <section>
+      <h2>6. 块级元素 vs 行内元素</h2>
+      <div class="demo-box">
+        <div class="block-demo">我是 div（块级）</div>
+        <div class="block-demo">我也是 div（独占一行）</div>
+        <span class="inline-demo">我是 span（行内）</span>
+        <span class="inline-demo">我接在后面（不换行）</span>
+      </div>
+    </section>
+
+    <!-- ==================== 2. CSS 核心概念 ==================== -->
+    <section>
+      <h2>7. CSS 核心概念</h2>
+      <p>所有样式都写在 <code>style.css</code> 中，打开那个文件对照着看。</p>
+
+      <h3>盒模型（Box Model）</h3>
+      <div class="box-model-demo">
+        <div class="box-content">内容</div>
+      </div>
+      <p class="note">每个元素都是一个矩形盒子：content → padding → border → margin</p>
+
+      <h3>Flexbox 布局</h3>
+      <div class="flex-demo">
+        <div class="flex-item">1</div>
+        <div class="flex-item">2</div>
+        <div class="flex-item">3</div>
+        <div class="flex-item">4</div>
+      </div>
+
+      <h3>定位（Position）</h3>
+      <div class="position-demo">
+        <div class="pos-relative">relative（相对定位）</div>
+        <div class="pos-absolute">absolute（绝对定位 — 相对于最近的定位祖先）</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>学完这个，打开浏览器开发者工具（F12），用选择器工具查看每个元素的样式来源。</p>
+    <p>下一步 → <strong>JavaScript 基础</strong></p>
+  </footer>
+
+</body>
+</html>

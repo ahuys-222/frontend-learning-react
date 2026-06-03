@@ -1,0 +1,287 @@
+/* ============================================================
+   CSS 基础学习 — 对应 index.html 的样式
+   学习要点：选择器、盒模型、Flexbox、定位、层叠优先级
+   ============================================================ */
+
+/* ---------- 1. 全局重置与基础设置 ---------- */
+/* * 是通配符选择器，选中所有元素 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;  /* border 和 padding 计入总宽高，更直观 */
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #f8fafc;        /* 浅灰背景 */
+  color: #1e293b;              /* 深灰文字 */
+  line-height: 1.6;            /* 行高 = 字号的 1.6 倍，阅读更舒服 */
+  max-width: 800px;            /* 内容区最大宽度 */
+  margin: 0 auto;              /* 上下0，左右auto = 居中 */
+  padding: 20px;
+}
+
+/* ---------- 2. 元素选择器 ---------- */
+/* 直接写标签名，会选中页面上所有该标签 */
+header {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 30px 0;
+  border-bottom: 3px solid #3b82f6;  /* 底部蓝色边框 */
+}
+
+h1 { font-size: 2em; }
+h2 {
+  font-size: 1.5em;
+  margin-top: 30px;
+  margin-bottom: 12px;
+  color: #1e40af;             /* 深蓝 */
+  border-left: 4px solid #3b82f6;
+  padding-left: 12px;
+}
+h3 { margin: 16px 0 8px; }
+
+p { margin-bottom: 8px; }
+
+/* ---------- 3. 类选择器（最常用） ---------- */
+/* .类名 选中所有 class 包含该名称的元素 */
+.subtitle {
+  color: #64748b;              /* 低调灰 */
+  font-size: 1.1em;
+}
+
+.note {
+  background: #fef3c7;        /* 淡黄背景 */
+  border: 1px solid #fbbf24;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 0.9em;
+  color: #92400e;
+  margin: 8px 0;
+}
+
+/* ---------- 4. 组合选择器 ---------- */
+/* 后代选择器：section 里面的 p */
+section p {
+  color: #475569;
+}
+
+/* ---------- 5. 表格样式 ---------- */
+table {
+  width: 100%;
+  border-collapse: collapse;  /* 合并边框，不然有双线 */
+  margin: 12px 0;
+}
+
+th, td {
+  border: 1px solid #cbd5e1;
+  padding: 10px 14px;
+  text-align: left;
+}
+
+th {
+  background: #3b82f6;
+  color: white;
+}
+
+tr:nth-child(even) {          /* 偶数行换色 — 伪类选择器 */
+  background: #f1f5f9;
+}
+
+/* ---------- 6. 伪类选择器 ---------- */
+/* :hover — 鼠标悬停时 */
+a:hover {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+/* ---------- 7. 表单样式 ---------- */
+.form-group {
+  margin-bottom: 16px;
+}
+
+label {
+  display: inline-block;
+  margin-right: 8px;
+  font-weight: 500;
+}
+
+input[type="text"],
+input[type="password"],
+select,
+textarea {
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+  max-width: 400px;
+  transition: border-color 0.2s;  /* 过渡动画 */
+}
+
+/* :focus — 输入框获得焦点时 */
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* ---------- 8. 按钮样式 ---------- */
+.btn {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.btn-primary {
+  background: #3b82f6;
+  color: white;
+}
+.btn-primary:hover {
+  background: #2563eb;
+}
+
+.btn-secondary {
+  background: #e2e8f0;
+  color: #475569;
+  margin-left: 8px;
+}
+
+/* ---------- 9. 块级 vs 行内 ---------- */
+.demo-box {
+  background: #e2e8f0;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.block-demo {
+  background: #3b82f6;
+  color: white;
+  padding: 8px 12px;
+  margin: 6px 0;
+  border-radius: 4px;
+  /* div 默认 display: block — 独占一行 */
+}
+
+.inline-demo {
+  background: #10b981;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  /* span 默认 display: inline — 不换行，宽高由内容决定 */
+}
+
+/* ---------- 10. 盒模型 ---------- */
+.box-model-demo {
+  background: #e2e8f0;
+  padding: 30px;              /* 内边距 — 背景色会填充这里 */
+  margin: 12px 0;             /* 外边距 — 透明的，推开其他元素 */
+}
+
+.box-content {
+  background: #f59e0b;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-weight: bold;
+  border: 4px solid #d97706;  /* border 在 padding 外面 */
+  /* content(文字) → padding(20px) → border(4px) → margin(0) */
+}
+
+/* ---------- 11. Flexbox — 现代布局的核心 ---------- */
+.flex-demo {
+  display: flex;              /* 开启弹性布局 */
+  gap: 12px;                  /* 子元素间距（现代写法，替代 margin） */
+  justify-content: center;    /* 水平居中 */
+  align-items: center;        /* 垂直居中 */
+  flex-wrap: wrap;            /* 放不下时换行 */
+  background: #e2e8f0;
+  padding: 16px;
+  border-radius: 8px;
+  height: 120px;
+}
+
+.flex-item {
+  background: #8b5cf6;
+  color: white;
+  width: 60px;
+  height: 60px;
+  display: flex;              /* 嵌套 flex，让内部文字也居中 */
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+/* ---------- 12. 定位 ---------- */
+.position-demo {
+  background: #e2e8f0;
+  padding: 16px;
+  border-radius: 8px;
+  min-height: 120px;
+  position: relative;         /* 为内部 absolute 元素建立定位参考系 */
+  margin: 12px 0;
+}
+
+.pos-relative {
+  background: #06b6d4;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  position: relative;
+  left: 20px;                 /* 相对于自己原来的位置右移20px */
+  /* relative：占着原来的位置不动，视觉上偏移 */
+}
+
+.pos-absolute {
+  background: #ef4444;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  position: absolute;
+  top: 10px;
+  right: 16px;                /* 相对于最近的定位祖先（position-demo） */
+  /* absolute：脱离文档流，不占位置 */
+}
+
+/* 占位图 */
+.placeholder-img {
+  width: 400px;
+  height: 200px;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  margin: 12px 0;
+}
+
+/* ---------- 13. 页脚 ---------- */
+footer {
+  margin-top: 50px;
+  padding: 20px 0;
+  border-top: 2px solid #cbd5e1;
+  text-align: center;
+  color: #64748b;
+}
+
+/* ---------- 14. 响应式（手机自适应） ---------- */
+/* @media 规则：当屏幕宽度 ≤ 600px 时生效 */
+@media (max-width: 600px) {
+  body {
+    padding: 12px;
+  }
+  h1 { font-size: 1.5em; }
+  .flex-demo {
+    flex-direction: column;   /* 小屏时竖向排列 */
+    height: auto;
+  }
+}

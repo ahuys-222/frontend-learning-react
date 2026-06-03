@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Step 2: JavaScript 基础</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- defer：等 HTML 解析完再执行 JS，避免找不到元素 -->
+  <script defer src="basics.js"></script>
+</head>
+<body>
+
+  <header>
+    <h1>JavaScript 基础 + ES6</h1>
+    <p class="subtitle">React 的前置技能 — 这些不熟，React 就是魔法</p>
+  </header>
+
+  <main>
+    <!-- 变量与数据类型 -->
+    <section>
+      <h2>1. 变量声明：let / const / var</h2>
+      <p>打开控制台（F12 → Console）看输出，然后对照 <code>basics.js</code> 文件学习。</p>
+      <button class="btn" onclick="demoVariables()">运行：变量演示</button>
+    </section>
+
+    <!-- 函数 -->
+    <section>
+      <h2>2. 函数 — 三种写法</h2>
+      <pre><code>// 普通函数
+function add(a, b) { return a + b; }
+
+// 函数表达式
+const add = function(a, b) { return a + b; };
+
+// 箭头函数（React 最常用）
+const add = (a, b) => a + b;</code></pre>
+      <button class="btn" onclick="demoFunctions()">运行：函数演示</button>
+    </section>
+
+    <!-- 数组方法 -->
+    <section>
+      <h2>3. 数组方法（面试必考，React 每天用）</h2>
+      <p><code>map</code> — 转换每个元素 | <code>filter</code> — 筛选 | <code>find</code> — 查找</p>
+      <div id="array-demo-output" class="output-box"></div>
+      <button class="btn" onclick="demoArrays()">运行：数组方法演示</button>
+    </section>
+
+    <!-- 解构与展开 -->
+    <section>
+      <h2>4. 解构赋值 & 展开运算符</h2>
+      <p>React 中无处不在：<code>const { name, age } = user;</code> <code>const newArr = [...oldArr, item]</code></p>
+      <button class="btn" onclick="demoDestructuring()">运行：解构演示</button>
+    </section>
+
+    <!-- 模板字符串 -->
+    <section>
+      <h2>5. 模板字符串</h2>
+      <p>用反引号 <code>`</code> 包裹，<code>${变量}</code> 插入值，告别 + 号拼接。</p>
+      <button class="btn" onclick="demoTemplateLiterals()">运行：模板字符串演示</button>
+    </section>
+
+    <!-- 异步：Promise -->
+    <section>
+      <h2>6. 异步编程：Promise → async/await</h2>
+      <p>React 中请求 API 数据的标准方式。Promise 有三种状态：pending → fulfilled / rejected。</p>
+      <div id="async-demo-output" class="output-box">等待结果…</div>
+      <button class="btn" onclick="demoAsync()">运行：异步演示（模拟请求）</button>
+    </section>
+
+    <!-- DOM 操作 -->
+    <section>
+      <h2>7. DOM 操作 — 用 JS 操控页面</h2>
+      <p>React 会帮你做这些，但理解原理很重要。</p>
+      <p id="dom-target" class="highlight-text">点下面的按钮来改变我！</p>
+      <button class="btn" onclick="demoDOM()">改变文字</button>
+      <button class="btn" onclick="demoDOMCreate()">动态创建元素</button>
+    </section>
+
+    <!-- 事件 -->
+    <section>
+      <h2>8. 事件处理</h2>
+      <p>React 中就是 <code>onClick={handler}</code>，本质一样。</p>
+      <div class="event-demo-area" id="event-area">
+        鼠标移到这里试试
+      </div>
+      <p id="event-log"></p>
+    </section>
+
+    <!-- 综合练习 -->
+    <section>
+      <h2>9. 小练习：Todo 计数器</h2>
+      <p>综合运用：变量、函数、DOM 操作、事件、数组方法</p>
+      <div class="todo-demo">
+        <div style="display: flex; gap: 8px;">
+          <input type="text" id="todo-input" placeholder="输入待办事项…" style="flex: 1;">
+          <button class="btn" onclick="addTodo()">添加</button>
+        </div>
+        <ul id="todo-list" style="margin-top: 12px;"></ul>
+        <p id="todo-count" style="font-weight: 600;"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>下一步 → <strong>React 入门：官方 Tic-Tac-Toe</strong></p>
+  </footer>
+
+</body>
+</html>

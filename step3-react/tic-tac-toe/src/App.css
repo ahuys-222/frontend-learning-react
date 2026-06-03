@@ -1,0 +1,130 @@
+/* ==================== 游戏布局 ==================== */
+.game {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.game-board {
+  text-align: center;
+}
+
+/* ==================== 状态文字 ==================== */
+.status {
+  font-size: 1.3em;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #1e40af;
+}
+
+/* ==================== 棋盘 ==================== */
+.board-row {
+  display: flex;
+  justify-content: center;
+}
+
+/* ==================== 格子 ==================== */
+/* Square 是 React 组件渲染的 button */
+.square {
+  width: 80px;
+  height: 80px;
+  font-size: 2em;
+  font-weight: bold;
+  background: white;
+  border: 2px solid #cbd5e1;
+  margin: 2px;
+  cursor: pointer;
+  color: #1e293b;
+  transition: background 0.15s;
+  border-radius: 4px;
+}
+
+.square:hover {
+  background: #e2e8f0;
+}
+
+/* 胜者高亮 */
+.square-winner {
+  background: #fef3c7;
+  border-color: #f59e0b;
+  color: #d97706;
+}
+
+/* ==================== 历史记录区 ==================== */
+.game-info {
+  min-width: 200px;
+}
+
+.game-info button {
+  padding: 6px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  font-size: 13px;
+  margin-bottom: 12px;
+  transition: background 0.15s;
+}
+
+.game-info button:hover {
+  background: #f1f5f9;
+}
+
+.game-info ol {
+  padding-left: 20px;
+  font-size: 14px;
+}
+
+.game-info li {
+  margin: 6px 0;
+}
+
+.game-info li button {
+  border: none;
+  background: none;
+  color: #3b82f6;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 2px 6px;
+  margin: 0;
+}
+
+.game-info li button:hover {
+  text-decoration: underline;
+  background: none;
+}
+
+.current-move {
+  font-weight: 700;
+  color: #1e293b;
+}
+
+/* ==================== 页头提示 ==================== */
+.app-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.app-header h1 {
+  font-size: 2em;
+  color: #1e40af;
+}
+
+.app-header p {
+  color: #64748b;
+  margin-top: 4px;
+}
+
+/* ==================== 移动端适配 ==================== */
+@media (max-width: 500px) {
+  .square {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5em;
+  }
+  .game {
+    gap: 20px;
+  }
+}
