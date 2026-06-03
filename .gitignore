@@ -2,3 +2,8 @@ node_modules/
 dist/
 .vite/
 *.local
+.claude/
+.playwright-mcp/
+*.png
+*.log
+*.yml

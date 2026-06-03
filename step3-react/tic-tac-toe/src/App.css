@@ -1,130 +1,184 @@
+/* ==================== 页头 ==================== */
+.app-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.app-header h1 {
+  font-size: 2.2em;
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+
+.app-header p {
+  color: #94a3b8;
+  font-size: 0.95em;
+}
+
+.app-header code {
+  background: rgba(255, 255, 255, 0.1);
+  color: #f59e0b;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
 /* ==================== 游戏布局 ==================== */
 .game {
   display: flex;
-  gap: 40px;
+  gap: 48px;
   align-items: flex-start;
   flex-wrap: wrap;
   justify-content: center;
 }
 
+/* ==================== 棋盘卡片 ==================== */
 .game-board {
-  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 32px 28px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
 /* ==================== 状态文字 ==================== */
 .status {
-  font-size: 1.3em;
+  font-size: 1.25em;
   font-weight: 600;
-  margin-bottom: 16px;
-  color: #1e40af;
+  margin-bottom: 24px;
+  color: #e2e8f0;
+  letter-spacing: 0.5px;
 }
 
 /* ==================== 棋盘 ==================== */
 .board-row {
   display: flex;
-  justify-content: center;
+  gap: 8px;
+  margin-bottom: 8px;
 }
 
 /* ==================== 格子 ==================== */
-/* Square 是 React 组件渲染的 button */
 .square {
-  width: 80px;
-  height: 80px;
-  font-size: 2em;
-  font-weight: bold;
-  background: white;
-  border: 2px solid #cbd5e1;
-  margin: 2px;
+  width: 90px;
+  height: 90px;
+  font-size: 2.2em;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.06);
+  border: 2px solid rgba(255, 255, 255, 0.12);
   cursor: pointer;
-  color: #1e293b;
-  transition: background 0.15s;
-  border-radius: 4px;
+  color: #e2e8f0;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .square:hover {
-  background: #e2e8f0;
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.square:active {
+  transform: translateY(0);
+}
+
+/* X 的样式 */
+.square:has(:not(:empty)) {
+  animation: pop 0.3s ease;
 }
 
 /* 胜者高亮 */
 .square-winner {
-  background: #fef3c7;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(239, 68, 68, 0.2));
   border-color: #f59e0b;
-  color: #d97706;
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.7); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(245, 158, 11, 0.3); }
+  50% { box-shadow: 0 0 35px rgba(245, 158, 11, 0.55); }
 }
 
 /* ==================== 历史记录区 ==================== */
 .game-info {
-  min-width: 200px;
+  min-width: 220px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px 24px;
+  backdrop-filter: blur(10px);
 }
 
-.game-info button {
-  padding: 6px 14px;
-  border: 1px solid #cbd5e1;
-  border-radius: 4px;
-  background: white;
+.game-info > button {
+  padding: 8px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
   cursor: pointer;
   font-size: 13px;
-  margin-bottom: 12px;
-  transition: background 0.15s;
+  margin-bottom: 16px;
+  transition: all 0.2s;
 }
 
-.game-info button:hover {
-  background: #f1f5f9;
+.game-info > button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .game-info ol {
-  padding-left: 20px;
+  padding-left: 18px;
   font-size: 14px;
 }
 
 .game-info li {
-  margin: 6px 0;
+  margin: 8px 0;
+  color: #94a3b8;
 }
 
 .game-info li button {
   border: none;
   background: none;
-  color: #3b82f6;
+  color: #60a5fa;
   cursor: pointer;
   font-size: 13px;
-  padding: 2px 6px;
-  margin: 0;
+  padding: 3px 8px;
+  border-radius: 4px;
+  transition: all 0.15s;
 }
 
 .game-info li button:hover {
-  text-decoration: underline;
-  background: none;
+  background: rgba(96, 165, 250, 0.15);
+  color: #93c5fd;
 }
 
 .current-move {
   font-weight: 700;
-  color: #1e293b;
+  color: #fbbf24;
 }
 
-/* ==================== 页头提示 ==================== */
-.app-header {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.app-header h1 {
-  font-size: 2em;
-  color: #1e40af;
-}
-
-.app-header p {
-  color: #64748b;
-  margin-top: 4px;
-}
-
-/* ==================== 移动端适配 ==================== */
-@media (max-width: 500px) {
+/* ==================== 移动端 ==================== */
+@media (max-width: 600px) {
+  .app-header h1 { font-size: 1.6em; }
+  .game { gap: 24px; }
+  .game-board { padding: 20px 16px; }
   .square {
-    width: 60px;
-    height: 60px;
-    font-size: 1.5em;
-  }
-  .game {
-    gap: 20px;
+    width: 70px;
+    height: 70px;
+    font-size: 1.7em;
   }
 }
