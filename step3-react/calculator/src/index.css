@@ -1,0 +1,94 @@
+/* ===== 全局重置 ===== */
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #000;
+  display: grid;
+  place-items: center;
+}
+
+/* ===== 计算器外壳 ===== */
+.calculator {
+  width: 340px;
+  display: grid;
+  gap: 12px;
+}
+
+/* ===== 显示屏 ===== */
+.display {
+  height: 80px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 0 12px;
+  color: #fff;
+  font-size: 3.2rem;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  overflow: hidden;      /* 数字太长不溢出 */
+}
+
+/* ===== 键盘 ===== */
+.keypad {
+  display: grid;
+  gap: 8px;
+}
+
+.keypad-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+/* ===== 按钮基础样式 ===== */
+.btn {
+  aspect-ratio: 1;           /* 正方形 */
+  border: none;
+  border-radius: 50%;        /* 圆形 */
+  font-size: 1.6rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: filter 120ms ease;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  color: #fff;
+  line-height: 1;
+}
+
+.btn:active {
+  filter: brightness(1.8);   /* 按下时变亮 */
+}
+
+/* ===== 按钮颜色变体 ===== */
+.btn-dark {
+  background: #333;
+}
+
+.btn-gray {
+  background: #a5a5a5;
+  color: #000;
+}
+
+.btn-orange {
+  background: #ff9f0a;
+}
+
+/* ===== 0 按钮占两格 ===== */
+.btn-zero {
+  grid-column: span 2;           /* 横跨两列 */
+  aspect-ratio: auto;            /* 取消正方形 */
+  border-radius: 48px;           /* 改成胶囊形 */
+  padding: 0 24px;
+  display: flex;
+  justify-content: flex-start;   /* 文字靠左 */
+  background: #333;
+}
