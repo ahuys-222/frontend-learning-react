@@ -1,22 +1,47 @@
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-  color: #e2e8f0;
-  line-height: 1.6;
-  min-height: 100vh;
+  margin: 0;
+  font-family:
+    Inter,
+    "Segoe UI",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  color: #e5edf7;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(248, 195, 122, 0.22), transparent 26%),
+    radial-gradient(circle at 80% 0%, rgba(56, 189, 248, 0.18), transparent 28%),
+    radial-gradient(circle at 50% 100%, rgba(129, 140, 248, 0.12), transparent 30%),
+    linear-gradient(180deg, #0a1020 0%, #060912 100%);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  padding: 0;
 }
 
 #root {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 16px;
+  display: grid;
+  place-items: center;
+  padding: 32px 20px 44px;
 }

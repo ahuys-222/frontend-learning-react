@@ -1,34 +1,26 @@
 import { useState } from "react";
+import "./App.css";
 
-/* ============================================================
-   React 入门：井字棋（Tic-Tac-Toe）
-   基于 React 官方教程，涵盖核心概念：
-   - 组件（Component）
-   - JSX
-   - Props（属性传递）
-   - useState（状态管理）
-   - 不可变更新（immutable update）
-   - 列表渲染（map）
-   - 条件渲染
-   - 状态提升（lifting state up）
-   ============================================================ */
-
-// ==================== Square 组件 ====================
-// 职责：渲染一个格子。通过 props 接收值和点击事件。
-// 这是一个"受控组件"——它不管理自己的状态，完全由父组件控制。
-function Square({ value, onSquareClick, isWinner }) {
+function Square({ value, onSquareClick, isWinner, isFilled }) {
   return (
     <button
-      className={`square ${isWinner ? "square-winner" : ""}`}
+      className={[
+        "square",
+        value === "X" ? "square-x" : "",
+        value === "O" ? "square-o" : "",
+        isWinner ? "square-winner" : "",
+        isFilled ? "square-filled" : "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
       onClick={onSquareClick}
+      aria-label={value ? `棋子 ${value}` : "空格子"}
     >
-      {value}
+      <span>{value}</span>
     </button>
   );
 }
 
-// ==================== Board 组件 ====================
-// 职责：渲染 3×3 棋盘。接收 squares 数组和 onPlay 回调。
 function Board({ xIsNext, squares, onPlay }) {
   function handleClick(i) {
     if (calculateWinner(squares) || squares[i]) return;
@@ -38,43 +30,53 @@ function Board({ xIsNext, squares, onPlay }) {
   }
 
   const winnerInfo = calculateWinner(squares);
-  const winner = winnerInfo ? winnerInfo.winner : null;
-  const winnerLine = winnerInfo ? winnerInfo.line : [];
+  const winner = winnerInfo?.winner ?? null;
+  const winnerLine = winnerInfo?.line ?? [];
+  const isDraw = !winner && squares.every(Boolean);
 
   let status;
+  let statusTone = "status-neutral";
   if (winner) {
-    status = `胜者：${winner}`;
-  } else if (squares.every(Boolean)) {
-    status = "平局！";
+    status = `胜者 ${winner}`;
+    statusTone = "status-winner";
+  } else if (isDraw) {
+    status = "平局";
+    statusTone = "status-draw";
   } else {
     status = `下一步：${xIsNext ? "X" : "O"}`;
   }
 
   return (
     <>
-      <div className="status">{status}</div>
-      {[0, 1, 2].map((row) => (
-        <div className="board-row" key={row}>
-          {[0, 1, 2].map((col) => {
-            const i = row * 3 + col;
-            return (
-              <Square
-                key={i}
-                value={squares[i]}
-                onSquareClick={() => handleClick(i)}
-                isWinner={winnerLine.includes(i)}
-              />
-            );
-          })}
-        </div>
-      ))}
+      <div className={`status ${statusTone}`}>
+        <span className="status-label">{status}</span>
+        <span className="status-subtitle">
+          {winner ? "连成三子，比赛结束" : isDraw ? "双方都很稳，这盘握手言和" : "点击任意空格继续"}
+        </span>
+      </div>
+
+      <div className="board-shell" aria-label="井字棋棋盘">
+        {[0, 1, 2].map((row) => (
+          <div className="board-row" key={row}>
+            {[0, 1, 2].map((col) => {
+              const i = row * 3 + col;
+              return (
+                <Square
+                  key={i}
+                  value={squares[i]}
+                  onSquareClick={() => handleClick(i)}
+                  isWinner={winnerLine.includes(i)}
+                  isFilled={Boolean(squares[i])}
+                />
+              );
+            })}
+          </div>
+        ))}
+      </div>
     </>
   );
 }
 
-// ==================== Game 组件（顶层） ====================
-// 职责：管理整个游戏的状态——当前棋盘、历史记录、轮到谁
-// 这叫做"状态提升"：把共享状态放在最近的公共祖先组件中
 export default function Game() {
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
@@ -82,6 +84,9 @@ export default function Game() {
 
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
+  const winnerInfo = calculateWinner(currentSquares);
+  const winner = winnerInfo?.winner ?? null;
+  const isDraw = !winner && currentSquares.every(Boolean);
 
   function handlePlay(nextSquares) {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
@@ -95,28 +100,28 @@ export default function Game() {
 
   const moves = history.map((squares, move) => {
     let description;
-    if (move === currentMove) {
-      description = move > 0 ? `你在第 ${move} 步` : "游戏开始";
-      return (
-        <li key={move}>
-          <span className="current-move">{description}</span>
-        </li>
-      );
-    } else if (move > 0) {
+
+    if (move === 0) {
+      description = "回到开局";
+    } else {
       const prevSquares = history[move - 1];
-      const changedIndex = squares.findIndex(
-        (sq, i) => sq !== prevSquares[i]
-      );
+      const changedIndex = squares.findIndex((sq, i) => sq !== prevSquares[i]);
       const row = Math.floor(changedIndex / 3) + 1;
       const col = (changedIndex % 3) + 1;
-      description = `跳到第 ${move} 步 (${row},${col})`;
-    } else {
-      description = "回到开始";
+      description = `第 ${move} 步 (${row}, ${col})`;
     }
+
+    const isCurrent = move === currentMove;
 
     return (
       <li key={move}>
-        <button onClick={() => jumpTo(move)}>{description}</button>
+        {isCurrent ? (
+          <span className="current-move" aria-current="step">
+            {move === 0 ? "游戏开始" : `当前：${description}`}
+          </span>
+        ) : (
+          <button onClick={() => jumpTo(move)}>{description}</button>
+        )}
       </li>
     );
   });
@@ -124,29 +129,50 @@ export default function Game() {
   const displayedMoves = ascending ? moves : [...moves].reverse();
 
   return (
-    <>
-      <header className="app-header">
-        <h1>React 入门：井字棋</h1>
-        <p>
-          打开 <code>src/App.jsx</code> 对照学习 — 组件、Props、useState、不可变更新
+    <main className="app">
+      <section className="hero">
+        <p className="eyebrow">Tic Tac Toe</p>
+        <h1>把一个简单的井字棋，做得更有气质一点</h1>
+        <p className="hero-copy">
+          保留原来的 React 逻辑，重新打磨成更干净的卡片布局、玻璃拟态质感和更有层次的棋盘体验。
         </p>
-      </header>
-      <div className="game">
-        <div className="game-board">
+      </section>
+
+      <section className="game">
+        <div className="game-board-panel">
           <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
         </div>
-        <div className="game-info">
-          <button onClick={() => setAscending(!ascending)}>
-            {ascending ? "↓ 降序排列" : "↑ 升序排列"}
-          </button>
-          <ol>{displayedMoves}</ol>
-        </div>
-      </div>
-    </>
+
+        <aside className="game-info-panel">
+          <div className="panel-header">
+            <div>
+              <p className="panel-kicker">比赛信息</p>
+              <h2>{winner ? "对局已分胜负" : isDraw ? "对局结束" : "实时回放"}</h2>
+            </div>
+
+            <button className="toggle-button" onClick={() => setAscending((value) => !value)}>
+              {ascending ? "降序" : "升序"}
+            </button>
+          </div>
+
+          <div className="summary-cards">
+            <div className="summary-card">
+              <span>回合</span>
+              <strong>{currentMove}</strong>
+            </div>
+            <div className="summary-card">
+              <span>轮到</span>
+              <strong>{winner || isDraw ? "-" : xIsNext ? "X" : "O"}</strong>
+            </div>
+          </div>
+
+          <ol className="history-list">{displayedMoves}</ol>
+        </aside>
+      </section>
+    </main>
   );
 }
 
-// ==================== 工具函数 ====================
 function calculateWinner(squares) {
   const lines = [
     [0, 1, 2],
@@ -158,10 +184,12 @@ function calculateWinner(squares) {
     [0, 4, 8],
     [2, 4, 6],
   ];
+
   for (const [a, b, c] of lines) {
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
       return { winner: squares[a], line: [a, b, c] };
     }
   }
+
   return null;
 }
