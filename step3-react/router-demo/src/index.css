@@ -1,0 +1,291 @@
+/* ===== 全局 ===== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+/* ===== 布局 ===== */
+.app {
+  max-width: 720px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+/* ===== 导航栏 ===== */
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 20px 20px 0;
+  flex-wrap: wrap;
+}
+
+.nav-logo {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #f1f5f9;
+  margin-right: 20px;
+}
+
+.nav-link {
+  padding: 10px 18px;
+  border-radius: 10px;
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition: background 200ms, color 200ms;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #e2e8f0;
+}
+
+/* NavLink 的 isActive 回调会自动加这个 class */
+.nav-link.active {
+  background: rgba(14, 165, 233, 0.15);
+  color: #38bdf8;
+}
+
+/* ===== 页面内容区 ===== */
+.page-content {
+  padding: 32px 20px 60px;
+}
+
+.page {
+  display: grid;
+  gap: 20px;
+}
+
+.page h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  color: #f1f5f9;
+  letter-spacing: -0.03em;
+}
+
+.page p {
+  margin: 0;
+  color: #94a3b8;
+}
+
+/* ===== 功能卡片（首页） ===== */
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.feature-card {
+  display: grid;
+  gap: 6px;
+  padding: 22px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  text-decoration: none;
+  color: inherit;
+  transition: background 200ms, border-color 200ms;
+}
+
+.feature-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.feature-icon {
+  font-size: 2rem;
+}
+
+.feature-card strong {
+  color: #f1f5f9;
+}
+
+.feature-hint {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* ===== 概念说明框 ===== */
+.concept-box {
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid rgba(14, 165, 233, 0.15);
+  background: rgba(14, 165, 233, 0.05);
+  display: grid;
+  gap: 10px;
+}
+
+.concept-box h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #7dd3fc;
+}
+
+.concept-box ul {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 6px;
+}
+
+.concept-box li {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.concept-box code {
+  background: rgba(14, 165, 233, 0.15);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.88rem;
+  color: #bae6fd;
+}
+
+.hint {
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+/* ===== 按钮 ===== */
+.btn-demo {
+  padding: 12px 22px;
+  border: none;
+  border-radius: 12px;
+  background: #0ea5e9;
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 200ms;
+  width: fit-content;
+}
+
+.btn-demo:hover {
+  background: #0284c7;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* ===== 用户列表 ===== */
+.user-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.user-card {
+  display: grid;
+  gap: 4px;
+  padding: 22px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  transition: background 200ms, transform 200ms;
+}
+
+.user-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-2px);
+}
+
+.user-avatar {
+  font-size: 2.5rem;
+}
+
+.user-avatar.large {
+  font-size: 4rem;
+}
+
+.user-card strong {
+  color: #f1f5f9;
+}
+
+/* ===== 用户详情 ===== */
+.user-detail-card {
+  display: grid;
+  gap: 8px;
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  text-align: center;
+  justify-items: center;
+}
+
+.role-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: rgba(14, 165, 233, 0.15);
+  color: #7dd3fc;
+  font-size: 0.85rem;
+}
+
+/* ===== 面包屑 ===== */
+.breadcrumb {
+  color: #64748b;
+  font-size: 0.88rem;
+}
+
+.breadcrumb a {
+  color: #94a3b8;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: #e2e8f0;
+}
+
+/* ===== 404 ===== */
+.not-found {
+  text-align: center;
+}
+
+.code-404 {
+  font-size: 5rem;
+  font-weight: 800;
+  color: #1e293b;
+  letter-spacing: -0.06em;
+  margin: 0;
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 500px) {
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .nav-logo {
+    margin-bottom: 6px;
+  }
+}

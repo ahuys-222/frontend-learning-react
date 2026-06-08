@@ -1,0 +1,219 @@
+/* ===== 全局 ===== */
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  color: #e2e8f0;
+}
+
+/* ===== 应用容器 ===== */
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 48px 20px;
+  display: grid;
+  gap: 24px;
+}
+
+/* ===== 搜索栏 ===== */
+.search-bar {
+  display: flex;
+  gap: 10px;
+}
+
+.search-input {
+  flex: 1;                    /* 占满剩余空间 */
+  padding: 14px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #f1f5f9;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 200ms ease;
+}
+
+.search-input::placeholder {
+  color: #64748b;
+}
+
+.search-input:focus {
+  border-color: rgba(56, 189, 248, 0.6);
+}
+
+.search-btn {
+  padding: 14px 24px;
+  border: none;
+  border-radius: 14px;
+  background: #0ea5e9;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 200ms ease, opacity 200ms ease;
+  white-space: nowrap;
+}
+
+.search-btn:hover {
+  background: #0284c7;
+}
+
+.search-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ===== 卡片通用 ===== */
+.card {
+  padding: 32px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  text-align: center;
+}
+
+/* ===== Loading ===== */
+.spinner {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 16px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #0ea5e9;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  color: #94a3b8;
+  margin: 0;
+}
+
+/* ===== 错误卡片 ===== */
+.card-error {
+  border-color: rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.08);
+}
+
+.error-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 12px;
+  display: grid;
+  place-items: center;
+  background: rgba(239, 68, 68, 0.2);
+  border-radius: 50%;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fca5a5;
+}
+
+.error-text {
+  color: #fca5a5;
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+/* ===== 引导提示 ===== */
+.card-hint {
+  padding: 56px 32px;
+}
+
+.hint-icon {
+  font-size: 3rem;
+  margin: 0 0 12px;
+}
+
+.hint-text {
+  color: #64748b;
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+/* ===== 天气卡片 ===== */
+.weather-header {
+  margin-bottom: 20px;
+}
+
+.city-name {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin: 0 0 4px;
+}
+
+.country {
+  color: #64748b;
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+}
+
+.weather-desc {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: rgba(14, 165, 233, 0.15);
+  color: #7dd3fc;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* ===== 大温度 ===== */
+.temp-main {
+  margin-bottom: 28px;
+}
+
+.temp-value {
+  font-size: 5rem;
+  font-weight: 700;
+  color: #f8fafc;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.temp-unit {
+  font-size: 2rem;
+  color: #94a3b8;
+  vertical-align: super;
+}
+
+/* ===== 详细信息网格 ===== */
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.detail-item {
+  padding: 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  text-align: left;
+}
+
+.detail-label {
+  display: block;
+  color: #64748b;
+  font-size: 0.82rem;
+  margin-bottom: 6px;
+}
+
+.detail-value {
+  display: block;
+  color: #e2e8f0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
